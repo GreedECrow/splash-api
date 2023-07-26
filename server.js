@@ -21,13 +21,13 @@ app.get("/photos", async (request, reponse) => {
     const res = await axios.get(API);
     console.log(res.data);
     reponse.status(200).json("hello");
-    const photos = res.data.results.map(photo)=>
-            return {
-                id: photo.id,
-                img_url: photo.urls.regular,
-                original_image: photo.links.self,
-                photographer: photo.user.name
-            }
-        })
-        reponse.staus(200).json("hoi hoi");
+    const photos = res.data.results.map((photo) => {
+        return {
+            id: photo.id,
+            img_url: photo.urls.regular,
+            original_image: photo.links.self,
+            photographer: photo.user.name
+        }
+    })
+    reponse.staus(200).json(photo);
 });
