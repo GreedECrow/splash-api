@@ -10,17 +10,17 @@ app.use(cors());
 
 const PORT = process.env.PORT || 8090;
 
-app.get("/", (request, reponse) => {
-    reponse.status(200).json("hello");
+app.get("/", (request, response) => {
+    response.status(200).json("hello");
 });
 
-app.listen(PORT, () => console.log(`app is listening on port ${PORT}`));
 
-app.get("/photos", async (request, reponse) => {
-    const API = `https:api.unsplash.com/photos/?client_id=${process.env.ACCESS_KEY}&query=goat`
+
+app.get("/photos", async (request, response) => {
+    const API = `https:api.unsplash.com/search/photos/?client_id=${process.env.ACCESS_KEY}&query=goat`
     const res = await axios.get(API);
     console.log(res.data);
-    reponse.status(200).json("hello");
+    //reponse.status(200).json("hello");
     const photos = res.data.results.map((photo) => {
         return {
             id: photo.id,
@@ -29,5 +29,7 @@ app.get("/photos", async (request, reponse) => {
             photographer: photo.user.name
         }
     })
-    reponse.staus(200).json(photo);
+    response.status(200).json(photos);
 });
+
+app.listen(PORT, () => console.log(`app is listening on port ${PORT}`));
